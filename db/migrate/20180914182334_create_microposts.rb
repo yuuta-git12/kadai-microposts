@@ -1,4 +1,4 @@
-class CreateMicroposts < ActiveRecord::Migration[5.0]
+rails g model Micropost content:string user:referencesclass CreateMicroposts < ActiveRecord::Migration[5.0]
   def change
     create_table :microposts do |t|
       t.string :content
