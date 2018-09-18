@@ -1,0 +1,12 @@
+
+  <% if current_user.favoritepost?(micropost) %>
+    <%= form_for(current_user.favorite_rsps.find_by(favorite_id: micropost.id), html: { method: :delete }) do |f| %>
+      <%= hidden_field_tag :favorite_id, micropost.id %>
+      <%= f.submit 'お気に入り解除', class: 'btn btn-warning  btn-xs' %>
+    <% end %>
+  <% else %>
+    <%= form_for(current_user.favorite_rsps.build) do |f| %>
+      <%= hidden_field_tag :favorite_id, micropost.id %>
+      <%= f.submit 'お気に入り', class: 'btn btn-success  btn-xs' %>
+    <% end %>
+  <% end %>

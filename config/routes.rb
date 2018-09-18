@@ -11,11 +11,19 @@ Rails.application.routes.draw do
    member do
      get :followings
      get :followers
+     get :favoriteposts
+     get :likes #お気に入りした投稿ページを表示させるアクション
    end
   end
   
-  resources :microposts, only: [:create, :destroy]
+  resources :microposts, only: [:create, :destroy] do
+      member do
+        get :favoriteusers
+      end
+  end
+  
   #ログインユーザがユーザーをフォロー/アンフォローできるようにするルーティング
   resources :relationships, only: [:create, :destroy]
+  resources :favorite_rsps, only: [:create, :destroy]
   
 end

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-   before_action :require_user_logged_in, only: [:index, :show, :followings, :followers]
+   before_action :require_user_logged_in, only: [:index, :show, :followings, :followers, :favoriteposts,:likes]
    
   def index
     @users = User.all.page(params[:page])
@@ -37,6 +37,18 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @followers = @user.followers.page(params[:page])
     counts(@user)
+  end
+  
+  def favoriteposts
+    @user = User.find(params[:id])
+    @favoriteposts = @user.favoriteposts.page(params[:page])
+    counts(@user)
+  end
+  
+  def likes #お気に入り登録した投稿一覧ページを表示させるアクション
+    @user = User.find(params[:id])
+    @favoriteposts = @user.favoriteposts.page(params[:page])
+    @checkuser = current_user
   end
   
   
